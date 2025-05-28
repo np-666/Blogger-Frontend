@@ -6,7 +6,7 @@ import Navbar from "./Navbar";
 export default function AddBlog() {
     const [formData, setFormData] = useState({ title: "", content: "", author: "" });
     const navigate = useNavigate();
-
+    const backend = import.meta.env.VITE_API_URL;
     const handleChange = (e) => {
         setFormData({ ...formData, [e.target.name]: e.target.value });
     };
@@ -15,7 +15,7 @@ export default function AddBlog() {
         e.preventDefault();
         try {
             const token = localStorage.getItem("token");
-            await axios.post(`https://blogger-backend-c5d7.onrender.com/api/blogs`, formData, {
+            await axios.post(`${backend}/api/blogs`, formData, {
                 headers: { Authorization: `Bearer ${token}` },
             });
             alert("Blog added successfully!");

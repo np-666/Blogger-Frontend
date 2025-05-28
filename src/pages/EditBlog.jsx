@@ -7,11 +7,11 @@ export default function EditBlog() {
     const { id } = useParams();
     const navigate = useNavigate();
     const [blog, setBlog] = useState({ title: "", content: "" });
-
+    const backend = import.meta.env.VITE_API_URL;
     useEffect(() => {
         const fetchBlog = async () => {
             try {
-                const response = await axios.get(`https://blogger-backend-c5d7.onrender.com/api/blogs/${id}`);
+                const response = await axios.get(`${backend}/api/blogs/${id}`);
                 setBlog(response.data);
             } catch (error) {
                 console.error("Error fetching blog:", error);
@@ -27,7 +27,7 @@ export default function EditBlog() {
     const handleUpdate = async (e) => {
         e.preventDefault();
         try {
-            await axios.put(`https://blogger-backend-c5d7.onrender.com/api/blogs/${id}`, blog);
+            await axios.put(`${backend}/api/blogs/${id}`, blog);
             alert("Blog updated successfully!");
             navigate(`/blog/${id}`);
         } catch (error) {

@@ -5,11 +5,11 @@ import Navbar from "./Navbar";
 
 export default function Dashboard() {
     const [blogs, setBlogs] = useState([]);
-
+    const backend = import.meta.env.VITE_API_URL;
     useEffect(() => {
         const fetchBlogs = async () => {
             try {
-                const response = await axios.get(`https://blogger-backend-c5d7.onrender.com/api/blogs`);
+                const response = await axios.get(`${backend}/api/blogs`);
                 setBlogs(response.data);
             } catch (error) {
                 console.error("Error fetching blogs:", error);

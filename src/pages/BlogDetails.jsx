@@ -7,11 +7,11 @@ export default function BlogDetails() {
     const { id } = useParams();
     const navigate = useNavigate();
     const [blog, setBlog] = useState(null);
-
+    const backend = import.meta.env.VITE_API_URL;
     useEffect(() => {
         const fetchBlog = async () => {
             try {
-                const response = await axios.get(`https://blogger-backend-c5d7.onrender.com/api/blogs/${id}`);
+                const response = await axios.get(`${backend}/api/blogs/${id}`);
                 setBlog(response.data);
             } catch (error) {
                 console.error("Error fetching blog details:", error);
@@ -22,7 +22,7 @@ export default function BlogDetails() {
 
     const deleteBlog = async () => {
         try {
-            await axios.delete(`https://blogger-backend-c5d7.onrender.com/api/blogs/${id}`);
+            await axios.delete(`${backend}api/blogs/${id}`);
             alert("Blog deleted successfully!");
             navigate("/dashboard");
         } catch (error) {

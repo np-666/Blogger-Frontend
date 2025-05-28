@@ -10,7 +10,7 @@ export default function SignUp() {
         email: "",
         password: "",
     });
-
+    const backend = import.meta.env.VITE_API_URL;
     const handleChange = (e) => {
         setFormData({ ...formData, [e.target.name]: e.target.value });
     };
@@ -21,7 +21,7 @@ export default function SignUp() {
         e.preventDefault();
         const { name, email, password } = formData;
         try {
-            const response = await axios.post(`https://blogger-backend-c5d7.onrender.com/api/signup`, {
+            const response = await axios.post(`${backend}/api/signup`, {
                 name,
                 email,
                 password,

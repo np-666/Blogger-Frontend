@@ -8,7 +8,7 @@ import Logo from "../assets/logo1.png";
 export default function SignIn() {
     const [formData, setFormData] = useState({ email: "", password: "" });
     const navigate = useNavigate();
-
+    const backend = import.meta.env.VITE_API_URL;
     const handleChange = (e) => {
         setFormData({ ...formData, [e.target.name]: e.target.value });
     };
@@ -16,7 +16,7 @@ export default function SignIn() {
     const handleSubmit = async (e) => {
         e.preventDefault();
         try {
-            const response = await axios.post(`https://blogger-backend-c5d7.onrender.com/api/login`, formData);
+            const response = await axios.post(`${backend}/api/login`, formData);
             alert(response.data.message);
 
             localStorage.setItem("token", response.data.token);
